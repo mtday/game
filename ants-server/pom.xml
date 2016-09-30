@@ -41,6 +41,12 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
+        <!-- Utilities -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
         <!-- Null checking annotations -->
         <dependency>
             <groupId>com.google.code.findbugs</groupId>

@@ -3,6 +3,7 @@ package ants.common.model.message;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.annotation.Nonnull;
 
@@ -27,8 +28,6 @@ public class RegisterBotResponse extends Message {
      * @param registered whether the bot has been registered successfully
      */
     public RegisterBotResponse(final boolean registered) {
-        super(MessageType.REGISTER_BOT_RESPONSE);
-
         this.registered = registered;
     }
 
@@ -44,7 +43,7 @@ public class RegisterBotResponse extends Message {
     @Override
     @Nonnull
     public String toString() {
-        final ToStringBuilder str = getToStringBuilder();
+        final ToStringBuilder str = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
         str.append("registered", isRegistered());
         return str.toString();
     }

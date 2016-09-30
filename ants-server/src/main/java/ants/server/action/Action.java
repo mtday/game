@@ -4,6 +4,7 @@ import ants.common.model.message.Message;
 import ants.common.model.message.MessageType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.undertow.websockets.core.WebSocketChannel;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.IOException;
 
@@ -47,8 +48,9 @@ public abstract class Action {
      * Process the provided command from the specified web socket channel.
      *
      * @param channel the web socket channel from which the message was received
-     * @param message the message to be processed
+     * @param message a {@link Pair} containing the {@link MessageType} and {@link Message} to be processed
      * @throws IOException if there is a problem writing response data to the web socket channel
      */
-    public abstract void process(@Nonnull WebSocketChannel channel, @Nonnull Message message) throws IOException;
+    public abstract void process(@Nonnull WebSocketChannel channel, @Nonnull Pair<MessageType, Message> message)
+            throws IOException;
 }

@@ -7,6 +7,7 @@ import ants.common.model.message.RegisterBotResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.undertow.websockets.core.WebSocketChannel;
 import io.undertow.websockets.core.WebSockets;
+import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,15 +36,16 @@ public class RegisterBotAction extends Action {
     }
 
     @Override
-    public void process(@Nonnull final WebSocketChannel channel, @Nonnull final Message message) throws IOException {
-        if (message instanceof RegisterBotRequest) {
-            final RegisterBotRequest registerBotRequest = (RegisterBotRequest) message;
+    public void process(@Nonnull final WebSocketChannel channel, @Nonnull final Pair<MessageType, Message> message)
+            throws IOException {
+        if (message.getValue() instanceof RegisterBotRequest) {
+            final RegisterBotRequest registerBotRequest = (RegisterBotRequest) message.getValue();
             LOG.info("Registering bot: {}", registerBotRequest);
 
             final RegisterBotResponse response = new RegisterBotResponse(true);
             WebSockets.sendText(getObjectMapper().writeValueAsString(response), channel, null);
         } else {
-            throw new IllegalArgumentException("Invalid message type: " + message);
+            throw new IllegalArgumentException("Invalid message type: " + message.getValue());
         }
     }
 }

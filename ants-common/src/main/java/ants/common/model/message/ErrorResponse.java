@@ -3,6 +3,7 @@ package ants.common.model.message;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.annotation.Nonnull;
 
@@ -28,8 +29,6 @@ public class ErrorResponse extends Message {
      * @param message the error message describing the problem
      */
     public ErrorResponse(@Nonnull final String message) {
-        super(MessageType.ERROR_RESPONSE);
-
         this.message = message;
     }
 
@@ -46,7 +45,7 @@ public class ErrorResponse extends Message {
     @Override
     @Nonnull
     public String toString() {
-        final ToStringBuilder str = getToStringBuilder();
+        final ToStringBuilder str = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
         str.append("message", getMessage());
         return str.toString();
     }
